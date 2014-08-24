@@ -56,15 +56,15 @@ summary(training_set)
 
 Combined_dataset<-rbind(training_set,test_set)
 
-# Cleaning special characters from the column names
+# Cleaning special characters from the column names & Subsetting for only mean/std dev measurements
 
 names(Combined_dataset)
 names(Combined_dataset) <- gsub("\\(|\\)", "", names(Combined_dataset))
-names(Combined_dataset)
+names(Combined_dataset) <- gsub("\\(|\\)|-|,", "", names(Combined_dataset))
 required_colnames <- names(Combined_dataset)
 required_colnames <- grep("mean|std",required_colnames, value=TRUE)
 Combined_dataset<-Combined_dataset[,c("id","Activity",required_colnames)]
-names(Combined_dataset) <- gsub("\\(|\\)|-|,", "", names(Combined_dataset))
+
 
 #For the final Summary/Grouped Averages file - used SQL package of R and ran a simple query 
 
