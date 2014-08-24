@@ -114,4 +114,4 @@ avg(fBodyBodyGyroJerkMagmeanFreq) as Avg_fBodyBodyGyroJerkMagmeanFreq from Combi
 
 # Writing out the final tidy data to working directory
 
-write.table(summary,file="tidy_data.txt")
+write.table(summary,file="tidy_data.txt",row.name=FALSE)
