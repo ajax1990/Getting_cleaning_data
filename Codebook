@@ -2,18 +2,88 @@ Source of the original data: https://d396qusza40orc.cloudfront.net/getdata%2Fpro
 
 Original description: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
-The attached R script (run_analysis.R) performs the following to clean up the data:
+Variable //  Description
 
-1. Reads the required files : X_Train,X_Test,Y_Train,Y_Test,Subject_train,Subject_test,features,activity_labels. 
-2. Names the columns in Subject_test/Subject_train as "id"
-3. Assigns the column names from "features.txt" file to X train/test
-4. Y_train/test are hardcoded in numbers. Each number represents an activity. The number to Activity label map
-is provided in activity_labels.txt. We map it and replace the numbers with activity labels.
-5. Creates the training & test set separately using cbind function.
-6. Merges training & test data using rbind function.
-7. Cleans special characters from the column names (brackets,dashes etc.)
-8. A list of only mean/std dev. variables is obtained from the merged dataset using grep function. 
-9. The aforementioned list is used to subset the merged dataset for only the mean/std dev variables. 
-10.The final dataset looks like : id(Subject) Activity(Labelled : Walking/Laying/Sitting etc.) Features..... 
-11. Finally for the averages data set  - sqldf package is used to compile a query that gives us the averages of the measurements
-by "id(Subject)" & "Activity".
+Activity //  Activity - one of : walking,walkingupstairs,walkingdownstairs,sitting,standing,laying
+id //  Subject code
+Avg_tBodyAccmeanX //  Average of tBodyAcc-mean-X
+Avg_tBodyAccmeanY //  Average of tBodyAcc-mean-Y
+Avg_tBodyAccmeanZ //  Average of tBodyAcc-mean-Z
+Avg_tBodyAccstdX //  Average of tBodyAcc-std-X
+Avg_tBodyAccstdY //  Average of tBodyAcc-std-Y
+Avg_tBodyAccstdZ //  Average of tBodyAcc-std-Z
+Avg_tGravityAccmeanX //  Average of tGravityAcc-mean-X
+Avg_tGravityAccmeanY //  Average of tGravityAcc-mean-Y
+Avg_tGravityAccmeanZ //  Average of tGravityAcc-mean-Z
+Avg_tGravityAccstdX //  Average of tGravityAcc-std-X
+Avg_tGravityAccstdY //  Average of tGravityAcc-std-Y
+Avg_tGravityAccstdZ //  Average of tGravityAcc-std-Z
+Avg_tBodyAccJerkmeanX //  Average of tBodyAccJerk-mean-X
+Avg_tBodyAccJerkmeanY //  Average of tBodyAccJerk-mean-Y
+Avg_tBodyAccJerkmeanZ //  Average of tBodyAccJerk-mean-Z
+Avg_tBodyAccJerkstdX //  Average of tBodyAccJerk-std-X
+Avg_tBodyAccJerkstdY //  Average of tBodyAccJerk-std-Y
+Avg_tBodyAccJerkstdZ //  Average of tBodyAccJerk-std-Z
+Avg_tBodyGyromeanX //  Average of tBodyGyro-mean-X
+Avg_tBodyGyromeanY //  Average of tBodyGyro-mean-Y
+Avg_tBodyGyromeanZ //  Average of tBodyGyro-mean-Z
+Avg_tBodyGyrostdX //  Average of tBodyGyro-std-X
+Avg_tBodyGyrostdY //  Average of tBodyGyro-std-Y
+Avg_tBodyGyrostdZ //  Average of tBodyGyro-std-Z
+Avg_tBodyGyroJerkmeanX //  Average of tBodyGyroJerk-mean-X
+Avg_tBodyGyroJerkmeanY //  Average of tBodyGyroJerk-mean-Y
+Avg_tBodyGyroJerkmeanZ //  Average of tBodyGyroJerk-mean-Z
+Avg_tBodyGyroJerkstdX //  Average of tBodyGyroJerk-std-X
+Avg_tBodyGyroJerkstdY //  Average of tBodyGyroJerk-std-Y
+Avg_tBodyGyroJerkstdZ //  Average of tBodyGyroJerk-std-Z
+Avg_tBodyAccMagmean //  Average of tBodyAccMag-mean
+Avg_tBodyAccMagstd //  Average of tBodyAccMag-std
+Avg_tGravityAccMagmean //  Average of tGravityAccMag-mean
+Avg_tGravityAccMagstd //  Average of tGravityAccMag-std
+Avg_tBodyAccJerkMagmean //  Average of tBodyAccJerkMag-mean
+Avg_tBodyAccJerkMagstd //  Average of tBodyAccJerkMag-std
+Avg_tBodyGyroMagmean //  Average of tBodyGyroMag-mean
+Avg_tBodyGyroMagstd //  Average of tBodyGyroMag-std
+Avg_tBodyGyroJerkMagmean //  Average of tBodyGyroJerkMag-mean
+Avg_tBodyGyroJerkMagstd //  Average of tBodyGyroJerkMag-std
+Avg_fBodyAccmeanX //  Average of fBodyAcc-mean-X
+Avg_fBodyAccmeanY //  Average of fBodyAcc-mean-Y
+Avg_fBodyAccmeanZ //  Average of fBodyAcc-mean-Z
+Avg_fBodyAccstdX //  Average of fBodyAcc-std-X
+Avg_fBodyAccstdY //  Average of fBodyAcc-std-Y
+Avg_fBodyAccstdZ //  Average of fBodyAcc-std-Z
+Avg_fBodyAccmeanFreqX //  Average of fBodyAcc-meanFreq-X
+Avg_fBodyAccmeanFreqY //  Average of fBodyAcc-meanFreq-Y
+Avg_fBodyAccmeanFreqZ //  Average of fBodyAcc-meanFreq-Z
+Avg_fBodyAccJerkmeanX //  Average of fBodyAccJerk-mean-X
+Avg_fBodyAccJerkmeanY //  Average of fBodyAccJerk-mean-Y
+Avg_fBodyAccJerkmeanZ //  Average of fBodyAccJerk-mean-Z
+Avg_fBodyAccJerkstdX //  Average of fBodyAccJerk-std-X
+Avg_fBodyAccJerkstdY //  Average of fBodyAccJerk-std-Y
+Avg_fBodyAccJerkstdZ //  Average of fBodyAccJerk-std-Z
+Avg_fBodyAccJerkmeanFreqX //  Average of fBodyAccJerk-meanFreq-X
+Avg_fBodyAccJerkmeanFreqY //  Average of fBodyAccJerk-meanFreq-Y
+Avg_fBodyAccJerkmeanFreqZ //  Average of fBodyAccJerk-meanFreq-Z
+Avg_fBodyGyromeanX //  Average of fBodyGyro-mean-X
+Avg_fBodyGyromeanY //  Average of fBodyGyro-mean-Y
+Avg_fBodyGyromeanZ //  Average of fBodyGyro-mean-Z
+Avg_fBodyGyrostdX //  Average of fBodyGyro-std-X
+Avg_fBodyGyrostdY //  Average of fBodyGyro-std-Y
+Avg_fBodyGyrostdZ //  Average of fBodyGyro-std-Z
+Avg_fBodyGyromeanFreqX //  Average of fBodyGyro-meanFreq-X
+Avg_fBodyGyromeanFreqY //  Average of fBodyGyro-meanFreq-Y
+Avg_fBodyGyromeanFreqZ //  Average of fBodyGyro-meanFreq-Z
+Avg_fBodyAccMagmean //  Average of fBodyAccMag-mean
+Avg_fBodyAccMagstd //  Average of fBodyAccMag-std
+Avg_fBodyAccMagmeanFreq //  Average of fBodyAccMag-meanFreq
+Avg_fBodyBodyAccJerkMagmean //  Average of fBodyBodyAccJerkMag-mean
+Avg_fBodyBodyAccJerkMagstd //  Average of fBodyBodyAccJerkMag-std
+Avg_fBodyBodyAccJerkMagmeanFreq //  Average of fBodyBodyAccJerkMag-meanFreq
+Avg_fBodyBodyGyroMagmean //  Average of fBodyBodyGyroMag-mean
+Avg_fBodyBodyGyroMagstd //  Average of fBodyBodyGyroMag-std
+Avg_fBodyBodyGyroMagmeanFreq //  Average of fBodyBodyGyroMag-meanFreq
+Avg_fBodyBodyGyroJerkMagmean //  Average of fBodyBodyGyroJerkMag-mean
+Avg_fBodyBodyGyroJerkMagstd //  Average of fBodyBodyGyroJerkMag-std
+Avg_fBodyBodyGyroJerkMagmeanFreq //  Average of fBodyBodyGyroJerkMag-meanFreq
+
+
