@@ -19,6 +19,6 @@ is provided in activity_labels.txt. We map it and replace the numbers with activ
 7. Cleans special characters from the column names (brackets,dashes etc.)
 8. A list of only mean/std dev. variables is obtained from the merged dataset using grep function. 
 9. The aforementioned list is used to subset the merged dataset for only the mean/std dev variables. 
-10.The final dataset looks like : id(Subject) Activity(Labelled : Walking/Laying/Sitting etc.) Features..... 
+10. The final dataset looks like : id(Subject) Activity(Labelled : Walking/Laying/Sitting etc.) Features..... 
 11. Finally for the averages data set  - sqldf package is used to compile a query that gives us the averages of the measurements
 by "id(Subject)" & "Activity".
